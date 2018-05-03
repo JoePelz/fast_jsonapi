@@ -202,7 +202,8 @@ module FastJsonapi
           serializer: compute_serializer_name(options[:serializer] || base_key_sym),
           relationship_type: relationship_type,
           cached: options[:cached] || false,
-          polymorphic: fetch_polymorphic_option(options)
+          polymorphic: fetch_polymorphic_option(options),
+          if: options[:if]
         }
       end
 

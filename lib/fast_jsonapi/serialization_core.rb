@@ -75,6 +75,9 @@ module FastJsonapi
         relationships = relationships_to_serialize if relationships.nil?
 
         relationships.each_with_object({}) do |(_k, relationship), hash|
+          if relationship[:if]
+            next unless relationship[:if].call(record)
+          end
           name = relationship[:key]
           empty_case = relationship[:relationship_type] == :has_many ? [] : nil
           hash[name] = {
